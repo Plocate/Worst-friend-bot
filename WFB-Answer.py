@@ -6,10 +6,13 @@ Created on Tue Apr 25 14:57:18 2017
 @author: paul.meunier
 """
 
-
 def generateAnswerToQuestion(userInput):
     answer = "Hello World";    
+    listTopic = []
+    """
+    listTopic = identifyTopic(userInput);
     
+    """
     return answer;
     
 def generateAnswerToAffirmation(userInput):

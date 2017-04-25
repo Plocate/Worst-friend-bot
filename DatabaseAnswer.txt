@@ -13,7 +13,7 @@
 # | : Separate two token with the same meaning
 
 I don't speak _@MT_
-Hi _@CN_, I'm DAD _>_ "I'm"
+Hi _@SN_, I'm DAD _>_ "I'm"
 Hello _@SN_, I'm worst-friend bot.
 You lost me at _@UT|QO_
 Good bye _@SN_.
@@ -37,12 +37,13 @@ Trust me
 Man? Triggered
 You died
 Everybody dies
-Spaaaaaaaaaaaaaaaaace
+Spaaaaaaaaaaaaaaaaace!
+Mada mada
 I used to be an _@CN_ like you, until I took an arrow to the knee.
 I used to be an adventurer like you, until I took an arrow to the knee.
 Grass grows, birds fly, sun shines, and brother, I hurt people.
 Science isn't about why! It's about why not!
-Do a barell roll
+Do a barel roll
 You are not a good person. You know that, right? Good people don't end up here.
 Wake me up, before you go-go
 A man chooses; a slave obeys.
