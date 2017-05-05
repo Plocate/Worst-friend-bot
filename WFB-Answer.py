@@ -8,6 +8,7 @@ Created on Tue Apr 25 14:57:18 2017
 
 import re
 import random
+import spacy
 from lecture import *
 
 class typeTopic:
@@ -33,19 +34,26 @@ def getFromTag(topic):
     return listSent
     
 
+
 #Is called if the useInput is recognised as a question
 def generateAnswerToQuestion(userInput, listWord):
-    answer = "Hello World"
+    sentence=""
+    for x in userInput:
+         sentence += x+" "
     
-    #for x in listWord:
-        
+    sentence = nlp(u"%s" % (sentence,))
+#    for np in sentence.noun_chunks:
+#        print(np.text, np.root.text, np.root.dep_, np.root.head.text)
     
+    
+
     return answer
     
 #Is called if the userInput is not a question and is correct
 #Can generate a question
 def generateAnswerToAffirmation(userInput, listWord):
-    answer = "Hello World"
+    
+    
     
     return answer;
 
@@ -140,6 +148,9 @@ def generateAnswer(userInput, sentenceType, listWord):
     return answer
     
 
+#load spacy
+nlp = spacy.load('en')
+
 #Chemin vers le lexicon
 pathLexicon="enlex-0.1.mlex"
 
@@ -156,7 +167,7 @@ dataTag = []
 database, dataTag = extractData(pathData);
 
 #Main Plocate
-dictionary = parseDictionary("enlex-0.1.mlex")
+dico = parseDictionary("enlex-0.1.mlex")
 
 print("Hajime!") 
 while True:
@@ -180,14 +191,17 @@ while True:
     		sentenceType = "question"
     
     		
-    userInput = tagToken(tokens, dictionary)
+    userInput = tagToken(tokens, dico)
+    userInput = tagSpacy(userInput)
+    
+    #If the bot doesn't know one of the words, it will send a premade answer
     for w in userInput:
     	if w.type == "UKN":
-    		print("TEST "+w.text)
+    		#print("TEST "+w.text)
     		sentenceType = "nonSense"    
         
-        print("WFB << " + randomAnswer(userLine))
-        if "stop" in userLine:
-            break
+    print("WFB << " + randomAnswer(userLine))
+    if "stop" in userInput:
+        break
 
 print ("Hello World\n")
