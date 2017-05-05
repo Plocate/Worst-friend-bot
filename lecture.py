@@ -12,10 +12,15 @@ class Bigram:
 
 class typeTopic:
 	
-	def __init__(self, text, type, subType):
-		self.text = text
-		self.type = type
-		self.subTyle = subTyle
+    def __init__(self, text, wordTypeT, subType):
+        self.text = text
+        self.wordType = wordTypeT
+        self.subType = subType
+        self.parseType = ""
+    
+    def setParseType(self, parseTypeT):
+        self.parseType = parseTypeT
+        
 		
 
 
