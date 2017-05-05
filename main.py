@@ -24,7 +24,7 @@ for t in tokens:
 		
 userInput = tagToken(tokens, dictionary)
 for w in userInput:
-	if w.type == "UKN":
+	if w.wordType == "UKN":
 		print("TEST "+w.text)
 		sentenceType = "nonSense"
 		
