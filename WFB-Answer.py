@@ -7,7 +7,7 @@ Created on Tue Apr 25 14:57:18 2017
 """
 
 import re
-import random
+import random as rndom
 import spacy
 from lecture import *
 
@@ -32,8 +32,24 @@ def getFromTag(topic):
             listSent.append(x.line)
             
     return listSent
-    
 
+#Uses spacy dependency parse to give a role to word in user input
+#Not every word needs to have a role, primary goal is to search for
+#the subject and the object of the sentence  
+def setWordRole(listWord):
+    global nlp
+    sentence =""
+    for x in listWord:
+        sentence += x.text
+    
+    doc = nlp(u"%s"% (sentence,))
+    for np in doc.noun_chunks:
+        for word in listWord:
+            if word.text == np.root.text:
+                word.parseType = np.root.dep_ + "|" + np.root.head.text
+            
+
+    return listWord
 
 #Is called if the useInput is recognised as a question
 def generateAnswerToQuestion(userInput, listWord):
@@ -42,9 +58,9 @@ def generateAnswerToQuestion(userInput, listWord):
          sentence += x+" "
     
     sentence = nlp(u"%s" % (sentence,))
-#    for np in sentence.noun_chunks:
-#        print(np.text, np.root.text, np.root.dep_, np.root.head.text)
     
+    #for np in sentence.noun_chunks:
+        #print(np.text, np.root.text, np.root.dep_, np.root.head.text)
     
 
     return answer
@@ -73,7 +89,7 @@ def pickOneNonSense(userInput, listWord):
         if word.soustype.find("UKN"):
             if len(possibilities) > 0 and not alreadyCompleted:
                 alreadyCompleted = True
-                answer = listWord[random.randrange(0, len(possibilities), 1)].text
+                answer = listWord[rndom.randrange(0, len(possibilities), 1)].text
                 answer = re.sub("@UT", word.text, answer)
             elif not alreadyCompleted:
                 alreadyCompleted = True
@@ -97,7 +113,7 @@ def randomAnswer(userInput):
             if len(x) >3 and x.lower() in l:
                 return l
         
-    return database[random.randrange(0, len(database))]
+    return database[rndom.randrange(0, len(database), 1)]
     
 #Function to extract premade sentences from a file and add them to the good 
 #list. Datatag is a list of sentences which contains a list of tag
@@ -148,7 +164,7 @@ def generateAnswer(userInput, sentenceType, listWord):
     return answer
     
 
-#load spacy
+#load spacy, to use in function call: global nlp
 nlp = spacy.load('en')
 
 #Chemin vers le lexicon
@@ -167,13 +183,14 @@ dataTag = []
 database, dataTag = extractData(pathData);
 
 #Main Plocate
+#parseDictionary defined in lecture.py
 dico = parseDictionary("enlex-0.1.mlex")
 
 print("Hajime!") 
 while True:
     
     #Traitement de userLine: separation, tagging des différents tokens    
-    entree = input("You : ");
+    userInput = input("You : ");
     
     stopWords = ["then", "therefore", "at", "of", "the", "thus", "so", "consequently"]
     questionWords = ["which", "what", "when", "who", "why", "where", "how", "whose", "whom", "am", "are", "is", "was", "were", "would", "can", "could", "shall", "will", "might", "must", "may", "do", "did"]
@@ -182,8 +199,8 @@ while True:
     sentenceType = "affirmation"
     
     
-    entree = entree.lower()
-    tokens = tokenise(entree, "en")
+    userInput = userInput.lower()
+    tokens = tokenise(userInput, "en")
     for t in tokens:
     	if t in stopWords:
     		tokens.remove(t)			
@@ -191,17 +208,18 @@ while True:
     		sentenceType = "question"
     
     		
-    userInput = tagToken(tokens, dico)
-    userInput = tagSpacy(userInput)
+    listWord = tagToken(tokens, dico)
+    listWord = setWordRole(listWord)
     
     #If the bot doesn't know one of the words, it will send a premade answer
-    for w in userInput:
-    	if w.type == "UKN":
+    for w in listWord:
+    	if w.wordType == "UKN":
     		#print("TEST "+w.text)
     		sentenceType = "nonSense"    
         
-    print("WFB << " + randomAnswer(userLine))
-    if "stop" in userInput:
+    print(rndom.randrange(0, 10, 2))    
+    print("WFB << " + generateAnswer(userInput, sentenceType, wordList))
+    if "stop" in tokens:
         break
 
 print ("Hello World\n")
