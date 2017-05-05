@@ -12,9 +12,11 @@ class Bigram:
 
 class typeTopic:
 	
-	def __init__(self, text, type):
+	def __init__(self, text, type, subType):
 		self.text = text
 		self.type = type
+		self.subTyle = subTyle
+		
 
 
 def read_paragraph_file(nomfichier):
@@ -31,14 +33,14 @@ def read_paragraph_file(nomfichier):
 def parseDictionary(nomFichier):
 	
 	dictWords = {}
-	print("lecture de la bibliothèque en cours...\n");
+	print("Parsing the library...\n");
 	with open(nomFichier, "r") as fichier:
 		for line in fichier:
 			temp = line.split('\t')
 			#print("test" + temp[0]);
-			dictWords[temp[0]] = typeTopic(temp[2], temp[1])
+			dictWords[temp[0]] = typeTopic(temp[2], temp[1], temp[3])
 	fichier.close()
-	print("lecture de la bilbiothèque terminée");
+	print("Library parsed !");
 	return dictWords;
 
 	

@@ -182,11 +182,6 @@ def evaluate(ygold, ypred, show_confusion_matrix=False):
         
 if __name__=="__main__":
 
-    # Read the filename from the command line as a positional argument
-    #argparser = argparse.ArgumentParser()
-    #argparser.add_argument("tagged_file")
-    #args = argparser.parse_args()
-
     # Read the data, divide into three sets and get vocab and tagset
     data = read_data("sequoia.tagged")
     train, dev, test = divide_data(data)
