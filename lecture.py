@@ -50,7 +50,7 @@ def tagToken(sent, dict):
 		if word in dict:
 			tok.append(dict[word])
 		else:
-			tok.append(typeTopic(word, "UKN"))
+			tok.append(typeTopic(word, "UKN", "UKN"))
 	return tok;
 
 
