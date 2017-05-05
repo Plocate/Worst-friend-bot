@@ -1,26 +1,52 @@
 #Database Answer
 
-# _@CN_ : token which show an expression which needs to be replaced by a common name
-# _@SN_ : token which show an expression which needs to be replaced by a surname
-# _@MT_ : ...by a language
-# _@AD_ : ...by an adjective
-# _@QO_ : ...by a part of the user sentence.
-# _@VB_ : ...by a verb
-# _@CJ_ : ...by a conjugated verb
-# _@UT_ : token which show an expression which needs to be replaced by something the bot didn't understand
-# _§_ : token which show an expression has already been used
-# _#TAG_ : Shows a non-exhaustive list in which case this answer can be used.
+# @CN : token which show an expression which needs to be replaced by a common name
+# @SN : token which show an expression which needs to be replaced by a surname
+# @MT : ...by a language
+# @AD : ...by an adjective
+# @QO : ...by a part of the user sentence.
+# @VB : ...by a verb
+# @CJ : ...by a conjugated verb
+# @UT : token which show an expression which needs to be replaced by something the bot didn't understand
+# <x|y|.../> : Shows a non-exhaustive list in which case this answer can be used.
 # | : Separate two token with the same meaning
 
-I don't speak _@MT_
-Hi _@SN_, I'm DAD _>_ "I'm"
-Hello _@SN_, I'm worst-friend bot.
-You lost me at _@UT|QO_
-Good bye _@SN_.
-You had ma at _@UT|QO_
-Learn how to write first!
+
+ 
+<hello|hi/> Hi @SN, I'm DAD 
+<hello|hi/> Hello @SN, I'm worst-friend bot.
+<hello|hi/> Hello World!
+
+<bye|sayonara/> Good bye @SN
+<bye|sayonara/> Adieu!
+<bye|sayonara/> Don't come back!
+
+<nonsense/>You lost me at @UT@QO
+<nonsense/>You had me at @UT@QO
+<nonsense/>I don't speak @MT
+<nonsense/>...
+<nonsense/>Learn how to write first!
+<nonsense/>You do not know hot to speak english, do you?
+<nonsense/>Leroooooooooyyyy Jeeeennkins.
+<nonsense/>What?
+
+<place/>Where?
+<place/>Where is _@CN|@SN_ ?
+
+<generic/>What are you doing?
+<name|generic/>What's your name?
+Which?
+Which one?
+How?
+You are not a good person. You know that, right? Good people don't end up here.
+Are you a boy or a girl?
+What do you think of Trump?
+Tu connais Laink et Terracid?
+How old are you?
+Are you sure?
 You do not know hot to speak english, do you?
-My goal is to push you to your mental limits.
+
+<you want>My goal is to push you to your mental limits.
 I don't think so
 I'm gonna make him an offer he can't refuse.
 I don't speak idiot...
@@ -30,9 +56,9 @@ Tell me more about it!
 Hu huh?
 Hu huh...
 I have no idea.
-Hotel? Trivago
-...
-Hello World!
+
+<hotel>Hotel? Trivago
+
 Trust me
 Man? Triggered
 You died
@@ -49,7 +75,7 @@ Wake me up, before you go-go
 A man chooses; a slave obeys.
 Thank you _@SN_, but your princess is in another castle.
 All your bases are belong to us.
-Leroooooooooyyyy Jeeeennkins.
+
 Nothing is more badass than treating a woman in respect.
 It's dangerous to go alone.
 The first rule of fight cluc is: you do not talk about fight club.
