@@ -12,9 +12,9 @@ class Bigram:
 
 class typeTopic:
 	
-	def _init_(self, text, soustype):
+	def __init__(self, text, type):
 		self.text = text
-		self.soustype = soustype
+		self.type = type
 
 
 def read_paragraph_file(nomfichier):
@@ -30,14 +30,26 @@ def read_paragraph_file(nomfichier):
 
 def parseDictionary(nomFichier):
 	
-	listWords = []
-	with open(nomfichier, "r") as fichier:
+	dictWords = {}
+	print("lecture de la bibliothèque en cours...\n");
+	with open(nomFichier, "r") as fichier:
 		for line in fichier:
 			temp = line.split('\t')
-			listWords[temp[2]].append(
+			#print("test" + temp[0]);
+			dictWords[temp[0]] = typeTopic(temp[2], temp[1])
 	fichier.close()
-	return listWords
+	print("lecture de la bilbiothèque terminée");
+	return dictWords;
 
+	
+def tagToken(sent, dict):
+	tok = [];
+	for word in sent:
+		if word in dict:
+			tok.append(dict[word])
+		else:
+			tok.append(typeTopic(word, "UKN"))
+	return tok;
 
 
 def write_paragraph_file(listPara, nomfichier):
@@ -90,6 +102,7 @@ def segment_into_sents(paragraph):
   
 def lowercase_sentence(sentence):
 	chaine = [c.lower() for c in sentence]
+	print("TEST : " + chaine);
 	return "".join(chaine)
 
 
