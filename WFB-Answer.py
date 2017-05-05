@@ -59,7 +59,6 @@ def pickOneNonSense(userInput, listWord):
     
     possibilities = []
     possibilities = getFromTag("nonsense")
-    possibilities.append("I did no not understand")
     
     for word in listWord:
         if word.soustype.find("UKN"):
@@ -82,7 +81,14 @@ def pickOneNonSense(userInput, listWord):
 
 #Function that replies a random anwser, pick a random word in the input 
 def randomAnswer(userInput):
-    return 
+    global database
+    global dataTag
+    for l in database:
+        for x in userInput:
+            if len(x) >3 and x.lower() in l:
+                return l
+        
+    return database[random.randrange(0, len(database))]
     
 #Function to extract premade sentences from a file and add them to the good 
 #list. Datatag is a list of sentences which contains a list of tag
@@ -113,7 +119,6 @@ def extractTagFromLine(line):
     
     temp =[]
     temp = line.split("/>")
-    print("extract tag" + temp[1])
     temp[0] = temp[0].replace("<", "", 1)
     temp[0] = temp[0].split("|")
     tagLine = TagAndLine(temp[0], temp[1])
@@ -134,10 +139,30 @@ def generateAnswer(userInput, sentenceType, listWord):
     return answer
     
 
-
+#Chemin vers le lexicon
 pathLexicon="enlex-0.1.mlex"
+
+#Chemin vers le fichier txt contenant toutes les phrases préconstruites
 pathData="DatabaseAnswer.txt"
+
+#Liste contenant toutes les lignes de la bases de données sans tag
 database = []
+
+#Liste contenant toutes les lignes de la bases de données ayant un tag
 dataTag = []
+
+#On remplit les deux listes précédentes avec le contenu du fichier texte
 database, dataTag = extractData(pathData);
+print("Hajime!") 
+while True:
+       
+    
+    userLine = input()
+    #Traitement de userLine: separation, tagging des différents tokens    
+    userLine = userLine.split(" ")
+    
+    print(randomAnswer(userLine))
+    if "stop" in userLine:
+        break
+
 print ("Hello World\n")

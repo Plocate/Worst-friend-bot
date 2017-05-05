@@ -13,13 +13,13 @@
 
 
  
-<hello|hi/> Hi @SN, I'm DAD 
-<hello|hi/> Hello @SN, I'm worst-friend bot.
-<hello|hi/> Hello World!
+<hello|hi/>Hi @SN, I'm DAD 
+<hello|hi/>Hello @SN, I'm worst-friend bot.
+<hello|hi/>Hello World!
 
-<bye|sayonara/> Good bye @SN
-<bye|sayonara/> Adieu!
-<bye|sayonara/> Don't come back!
+<bye|sayonara/>Good bye @SN
+<bye|sayonara/>Adieu!
+<bye|sayonara/>Don't come back!
 
 <nonsense/>You lost me at @UT@QO
 <nonsense/>You had me at @UT@QO
@@ -29,6 +29,7 @@
 <nonsense/>You do not know hot to speak english, do you?
 <nonsense/>Leroooooooooyyyy Jeeeennkins.
 <nonsense/>What?
+<nonsense/>You do not know hot to speak english, do you?
 
 <place/>Where?
 <place/>Where is _@CN|@SN_ ?
@@ -44,7 +45,7 @@ What do you think of Trump?
 Tu connais Laink et Terracid?
 How old are you?
 Are you sure?
-You do not know hot to speak english, do you?
+
 
 <you want>My goal is to push you to your mental limits.
 I don't think so
