@@ -13,9 +13,9 @@
 
 
  
-<hello|hi/>Hi @SN, I'm DAD 
-<hello|hi/>Hello @SN, I'm worst-friend bot.
-<hello|hi/>Hello World!
+<hello|hi|greetings|sup|what's up|yo/>Hi @SN, I'm DAD 
+<hello|hi|greetings|sup|what's up|yo/>Hello @SN, I'm worst-friend bot.
+<hello|hi|greetings|sup|what's up|yo/>Hello World!
 
 <bye|sayonara/>Good bye @SN
 <bye|sayonara/>Adieu!

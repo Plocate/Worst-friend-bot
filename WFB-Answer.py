@@ -8,6 +8,7 @@ Created on Tue Apr 25 14:57:18 2017
 
 import re
 import random
+from lecture import *
 
 class typeTopic:
 	def _init_(self, text, soustype):
@@ -153,16 +154,40 @@ dataTag = []
 
 #On remplit les deux listes précédentes avec le contenu du fichier texte
 database, dataTag = extractData(pathData);
+
+#Main Plocate
+dictionary = parseDictionary("enlex-0.1.mlex")
+
 print("Hajime!") 
 while True:
-       
     
-    userLine = input()
     #Traitement de userLine: separation, tagging des différents tokens    
-    userLine = userLine.split(" ")
+    entree = input("You : ");
     
-    print(randomAnswer(userLine))
-    if "stop" in userLine:
-        break
+    stopWords = ["then", "therefore", "at", "of", "the", "thus", "so", "consequently"]
+    questionWords = ["which", "what", "when", "who", "why", "where", "how", "whose", "whom", "am", "are", "is", "was", "were", "would", "can", "could", "shall", "will", "might", "must", "may", "do", "did"]
+    
+    
+    sentenceType = "affirmation"
+    
+    
+    entree = entree.lower()
+    tokens = tokenise(entree, "en")
+    for t in tokens:
+    	if t in stopWords:
+    		tokens.remove(t)			
+    	if t == "?":
+    		sentenceType = "question"
+    
+    		
+    userInput = tagToken(tokens, dictionary)
+    for w in userInput:
+    	if w.type == "UKN":
+    		print("TEST "+w.text)
+    		sentenceType = "nonSense"    
+        
+        print("WFB << " + randomAnswer(userLine))
+        if "stop" in userLine:
+            break
 
 print ("Hello World\n")
