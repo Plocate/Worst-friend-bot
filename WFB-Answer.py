@@ -270,7 +270,9 @@ def generateAnswer(userInput, sentenceType, listWord):
     
 
 #load spacy, to use in function call: global nlp
+print("loading dictionary...")
 nlp = spacy.load('en')
+print("dictionay loaded !")
 
 #Chemin vers le lexicon
 pathLexicon="enlex-0.1.mlex"
@@ -326,6 +328,8 @@ while True:
     userInput = input("You : ");
     if(userInput == "stop"):
         break;
+    if(len(userInput) == 0):
+        continue;
 		
     #stopWords = ["then", "therefore", "at", "of", "the", "thus", "so", "consequently"]
     questionWords = ["which", "what", "when", "who", "why", "where", "how", "whose", "whom", "am", "are", "is", "was", "were", "would", "can", "could", "shall", "will", "might", "must", "may", "do", "did"]
@@ -350,12 +354,12 @@ while True:
     for idx in range(len(userInput)):
         if(userInput[idx].pos_ == "VERB"):
             for idy in range(len(subjects)):
-                if subjects[idy][0] == userInput[idx+1].text:
+                if idx+1< len(userInput) and subjects[idy][0] == userInput[idx+1].text:
                     sentenceType = "question"
                     for idz in range(len(subjects[idy])):
-                        if(subjects[idy][idz] != userInput[idz+idx+1].text):
+                        if(idz+idx+1>= len(userInput) or subjects[idy][idz] != userInput[idz+idx+1].text):
                             sentenceType = "affirmation"
-        print(userInput[idx].text, userInput[idx].lemma, userInput[idx].lemma_, userInput[idx].tag, userInput[idx].tag_, userInput[idx].pos, userInput[idx].pos_)
+        #print(userInput[idx].text, userInput[idx].lemma, userInput[idx].lemma_, userInput[idx].tag, userInput[idx].tag_, userInput[idx].pos, userInput[idx].pos_)
 
     if userInput[len(userInput)-1].text == "?":
         sentenceType = "question" 
@@ -363,8 +367,6 @@ while True:
     for w in userInput:
         if w.lemma >= 776980:
             sentenceType = "nonsense"
-    
-    print(sentenceType)
     
     print("sentence : " + sentenceType)
     print("WFB << " + generateAnswer(tokens, sentenceType, userInput))
