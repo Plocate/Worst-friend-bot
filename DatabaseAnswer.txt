@@ -1,7 +1,7 @@
 #Database Answer
 
-# @CN : token which show an expression which needs to be replaced by a common name
-# @SN : token which show an expression which needs to be replaced by a surname
+# @ON : token which show an expression which needs to be replaced by a object name
+# @SN : token which show an expression which needs to be replaced by a subject name
 # @MT : ...by a language
 # @AD : ...by an adjective
 # @QO : ...by a part of the user sentence.
@@ -13,16 +13,18 @@
 
 
  
-<hello|hi|greetings|sup|what's up|yo/>Hi @SN, I'm DAD 
-<hello|hi|greetings|sup|what's up|yo/>Hello @SN, I'm worst-friend bot.
+<hello|hi|greetings|sup|what's up|yo/>Hi @PN, I'm DAD 
+<hello|hi|greetings|sup|what's up|yo/>Hello @PN, I'm worst-friend bot.
 <hello|hi|greetings|sup|what's up|yo/>Hello World!
+<hello|hi|greetings|sup|what's up|yo/>Hello
+<hello|hi|greetings|sup|what's up|yo/>
 
-<bye|sayonara/>Good bye @SN
+<bye|sayonara/>Good bye @PN
 <bye|sayonara/>Adieu!
 <bye|sayonara/>Don't come back!
 
-<nonsense/>You lost me at @UT@QO
-<nonsense/>You had me at @UT@QO
+<nonsense/>You lost me at @UT
+<nonsense/>You had me at @UT
 <nonsense/>I don't speak @MT
 <nonsense/>...
 <nonsense/>Learn how to write first!
@@ -32,7 +34,7 @@
 <nonsense/>You do not know hot to speak english, do you?
 
 <place/>Where?
-<place/>Where is _@CN|@SN_ ?
+<place/>Where is @CN|@SN ?
 
 <generic/>What are you doing?
 <name|generic/>What's your name?
@@ -66,7 +68,7 @@ You died
 Everybody dies
 Spaaaaaaaaaaaaaaaaace!
 Mada mada
-I used to be an _@CN_ like you, until I took an arrow to the knee.
+I used to be an @CN like you, until I took an arrow to the knee.
 I used to be an adventurer like you, until I took an arrow to the knee.
 Grass grows, birds fly, sun shines, and brother, I hurt people.
 Science isn't about why! It's about why not!
@@ -74,7 +76,7 @@ Do a barel roll
 You are not a good person. You know that, right? Good people don't end up here.
 Wake me up, before you go-go
 A man chooses; a slave obeys.
-Thank you _@SN_, but your princess is in another castle.
+Thank you @SN, but your princess is in another castle.
 All your bases are belong to us.
 
 Nothing is more badass than treating a woman in respect.
@@ -185,9 +187,9 @@ Nom de dieu de putain de bordel de merde de saloperie de connard d'enculé de ta
 Eve, Plant.
 I'am your father.
 We said that we would not talk about moms...
-Yo mama so fat shes on both sides of the family.
-Your mum is fat.
-Yo momma so fat she sued xbox 360 for guessing her weight.
+<mom|mother/>Yo mama so fat shes on both sides of the family.
+<mama/>Your mum is fat.
+<mama/>Yo momma so fat she sued xbox 360 for guessing her weight.
 Did you put your name in the goblet of fire?
 Philippe! Je sais ou tu t'cache.
 Heroes never die.

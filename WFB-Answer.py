@@ -11,11 +11,6 @@ import random as rndom
 import spacy
 from lecture import *
 
-class typeTopic:
-	def _init_(self, text, soustype):
-		self.text = text
-		self.soustype = soustype
-
 #Contains a sentence from the database and its associated topics/tags
 class TagAndLine:
     def __init__(self, tag, lineT):
@@ -32,6 +27,114 @@ def getFromTag(topic):
             listSent.append(x.line)
             
     return listSent
+
+#Concatenate a list of string in on string
+def concatStr(listStr):
+    conc = ""
+    for st in listStr:
+        conc += st
+        
+    return conc
+
+#define correspondances between @SThinh and the lexicon abbrevations
+def fillCorres(path):
+    hTable = {}
+    
+    with open(path, "r") as fichier:
+        for line in fichier:
+            line = line.strip('\n')
+            line  = line.strip()
+            #line starting with '#'shall not be added to the database
+            if line.find("#") != 0:
+                if line != "":
+                    listAt = line.split(':')
+                    hTable[listAt[0]] = listAt[1]
+                    
+    fichier.close();
+    
+    return hTable
+
+#Replace @smthing in the database sentences, we already know it contains a @
+def replaceAt(answer, userInput, listWord):
+    listAt = []
+    count = answer.count('@')
+    
+    if count == 0:    #If there is no token to replace in
+        return answer
+    
+    #we need to replace a token @
+    global corresAt
+    global nlp
+    
+    listAt = re.findall("@[A-Z][A-Z]", answer)
+    
+    for st in listAt:
+        res = corresAt.get(st, "notFound")
+        if(res != "notFound"):
+            res = res.split('|')
+            target = ""
+            if(res[1] == "dobj"):
+                for np in listWord.noun_chunks:
+                    if np.root.dep_ == "dobj":
+                        target = np.root.text
+                        break;
+            elif(res[1] == "nsubj"):
+                for np in listWord.noun_chunks:
+                    if np.root.dep_ == "nsubj":
+                        target = np.root.text
+                        break;
+            elif(res[1] == "attr"):
+                for np in listWord.noun_chunks:
+                    print( np.root.text + " : " + np.root.dep_)
+                    if np.root.dep_ == "attr":
+                        target = np.root.text
+                        break;
+            elif res[0] == "ADJ":
+                for word in listWord:
+                    if word.pos_ == "ADJ":
+                        target = word.text
+                        break
+            elif res[0] == "VERB":
+                for word in listWord:
+                    if word.pos_ == "VERB":
+                        target = word.text
+                        break
+            elif res[0] == "UKN":
+                for word in listWord:
+                    if word.lemma == 776980:
+                        target =word.text
+                        break
+            """elif res[0] == GROUP:
+                for word in wordList:
+                    if word.pos_ == ADJ:
+                        target = word.text
+                        break"""      
+                        
+            answer =  re.sub(st, target, answer)
+                    
+                    
+    return answer
+
+#Cherche si un des mots corresponds à un tag dans la base de donnée
+def existTags(userInput, listWord, opTag = ""):
+    global dataTag
+    listPoss = []
+    for x in dataTag:
+        for y in x.tagList:
+            if opTag != "" and y in opTag:
+                listPoss.append(x.line)
+            elif y in userInput:
+                listPoss.append(x.line)
+                
+    if len(listPoss)==0:
+        return ""
+    
+    answer = listPoss[rndom.randrange(0, len(listPoss), 1)]
+    
+    answer = "Hello @PN, I'm worst-friend bot."
+    print("answer at exist : " + answer)
+    
+    return replaceAt(answer, userInput, listWord)
 
 #Uses spacy dependency parse to give a role to word in user input
 #Not every word needs to have a role, primary goal is to search for
@@ -53,14 +156,12 @@ def setWordRole(listWord):
 
 #Is called if the useInput is recognised as a question
 def generateAnswerToQuestion(userInput, listWord):
-    sentence=""
-    for x in userInput:
-         sentence += x+" "
+    answer =""
+    sentence = concatStr(userInput)
     
     sentence = nlp(u"%s" % (sentence,))
     
-    #for np in sentence.noun_chunks:
-        #print(np.text, np.root.text, np.root.dep_, np.root.head.text)
+   
     
 
     return answer
@@ -68,6 +169,13 @@ def generateAnswerToQuestion(userInput, listWord):
 #Is called if the userInput is not a question and is correct
 #Can generate a question
 def generateAnswerToAffirmation(userInput, listWord):
+    
+    answer=""
+    sentence = concatStr(userInput)
+    
+    doc = nlp(u"%s" % (sentence,))
+    if(existTags(userInput, listWord)):
+        return existTags(userInput, listWord)
     
     
     
@@ -182,12 +290,34 @@ dataTag = []
 #On remplit les deux listes précédentes avec le contenu du fichier texte
 database, dataTag = extractData(pathData);
 
-#Main Plocate
+#Fill the dictionnary with correspondances between @SThing and the 
+#lexicon
+corresAt = {}
+corresAt = fillCorres("corresAt.txt")
+
 #parseDictionary defined in lecture.py
 dico = parseDictionary("enlex-0.1.mlex")
+"""
+for x in dataTag:
+    print("list : ")
+    for y in x.tagList:    
+        print(y)
+    print( "line : "+x.line)
+    print()
+"""
 
 print("Hajime!") 
-while True:
+print("Hello, I'm Glados")
+userIn = "Hello, I'm Glados"
+userIn = userIn.lower()
+listWord = nlp(u"%s"%(userIn, ))
+userIn = tokenise(userIn, "en")
+sentence = "Hello @PN, I'm worst-friend bot."
+
+
+print(existTags(userIn, listWord))
+
+while False:
     
     #Traitement de userLine: separation, tagging des différents tokens    
     userInput = input("You : ");
@@ -217,8 +347,7 @@ while True:
     		#print("TEST "+w.text)
     		sentenceType = "nonSense"    
         
-    print(rndom.randrange(0, 10, 2))    
-    print("WFB << " + generateAnswer(userInput, sentenceType, wordList))
+    print("WFB << " + generateAnswer(userInput, sentenceType, listWord))
     if "stop" in tokens:
         break
 
