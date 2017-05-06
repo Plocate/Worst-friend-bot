@@ -32,7 +32,7 @@ def getFromTag(topic):
 def concatStr(listStr):
     conc = ""
     for st in listStr:
-        conc += st
+        conc += st+" "
         
     return conc
 
@@ -85,7 +85,7 @@ def replaceAt(answer, userInput, listWord):
                         break;
             elif(res[0] == "PROPN" or res[1] == "attr"):
                 for np in listWord.noun_chunks:
-                    print( np.root.text + " : " + np.root.dep_)
+                    #print( np.root.text + " : " + np.root.dep_)
                     if np.root.dep_ == "attr":
                         target = np.root.text
                         break;
@@ -115,15 +115,16 @@ def replaceAt(answer, userInput, listWord):
                     
     return answer
 
-#Cherche si un des mots corresponds à un tag dans la base de donnée
+#Cherche si un des tags de la base de donnée est inclus dans la phrase
 def existTags(userInput, listWord, opTag = ""):
+    sentence = concatStr(userInput)
     global dataTag
     listPoss = []
     for x in dataTag:
         for y in x.tagList:
             if opTag != "" and y in opTag:
                 listPoss.append(x.line)
-            elif y in userInput:
+            elif sentence.count(y) != 0:
                 listPoss.append(x.line)
                 
     if len(listPoss)==0:
@@ -181,7 +182,7 @@ def build_noun(listWord):
             for w in listWord:
                 if np.text == w.text:
                     return np.text + np.root.head.text, w.tag_
-        
+    i=0
     for w in listWord:
         if w.pos_ == "NOUN" or w.pos_ == "PROPN":
             return w.text, w.tag_
@@ -192,7 +193,8 @@ def build_noun(listWord):
 def build_adj(listWord):
         
     for w in listWord:
-        if w.pos_ == "JJ":
+        if w.tag_ == "JJ" or w.pos_ == "JJR" or w.pos_ == "JJS":
+            print(w.text)
             return w.text
     
     return ""
@@ -205,24 +207,63 @@ def build_verb(listWord):
             for w in listWord:
                 if w.text == np.root.head.text:
                     #si un verbe est attaché au sujet, on retourne le lemma
-                    return w.lemma_
+                    return w.lemma_, w.tag_
     
     #Sinon on chercher un autre verbe dans la phrase
     for w in listWord:
         if w.pos_ =="VERB":
-            return w.lemma_
+            return w.lemma_, w.tag_
         
     #On a pas trouvé de verbe
-    return ""
+    return "", ""
 
 #Is called if the useInput is recognised as a question
 def generateAnswerToQuestion(userInput, listWord):
-    answer =""
+    answer=""
     sentence = concatStr(userInput)
     
-    sentence = nlp(u"%s" % (sentence,))
+    doc = nlp(u"%s" % (sentence,))
     
-
+    #tag will make up for simple stuff like greeting or saying good bye
+    if(existTags(userInput, listWord)!=""):
+        return existTags(userInput, listWord)
+    
+    pronoun = build_pronoun(listWord)
+    dual = pronoun.split(" ")
+    pronoun = dual[len(dual)-1]
+    noun, typeNoun = build_noun(listWord)
+    adjective = build_adj(listWord)
+    verb, typeVerb = build_verb(listWord)
+    lemmeVerb = verb
+    
+    print(sentence)
+    print("pronoun : " + pronoun + " | noun:typeNoun" + noun +":"+typeNoun + " | verb:typeVerb " + verb + ":" +typeVerb )
+    
+    #Conjugate verb and trim pronoun before attacking the interogative word switch "switch"
+    #conjugate the lemme verb : https://spacy.io/docs/usage/pos-tagging#pos-tagging-english
+    
+    #here noly present tense, but there should be past and future
+    #mustbe a way to counjugate but i don't know howto 
+    """if typeVerb == "VBZ":   #3rd person - present tense
+        
+    elif typeVerb == "VPB"  #other persons - present tense
+    
+    
+    global questionWords
+    #Si le nom de la phrase est dans les mots interrogatifs
+    if(noun !="" and noun.lower() in questionWords):
+        if noun.lower() in "what":
+            
+        if noun.lower() in "why":
+        
+        if noun.lower() in "where":
+            
+        if noun.lower() in "which":
+            
+        if noun.lower() in "how":
+    else:
+        """
+    
     return answer
     
 #Is called if the userInput is not a question and is correct
@@ -235,16 +276,15 @@ def generateAnswerToAffirmation(userInput, listWord):
     doc = nlp(u"%s" % (sentence,))
     
     #tag will make up for simple stuff like greeting or saying good bye
-    if(existTags(userInput, listWord)):
+    if(existTags(userInput, listWord)!=""):
         return existTags(userInput, listWord)
     
-    #If the user talk about the bot
     
     #We will try to build a generic answer
     pronoun = build_pronoun(listWord)
     noun, typeNoun = build_noun(listWord)
     adjective = build_adj(listWord)
-    verb = build_verb(listWord)
+    verb, typeVerb = build_verb(listWord)
     lemmeVerb = verb
         
     if verb != "":
@@ -269,16 +309,19 @@ def generateAnswerToAffirmation(userInput, listWord):
             if(pronoun == "he" or pronoun == "she" or pronoun == "it"):
                 verb= verb+"s "
 
-    if noun != "":
+    if noun != "" and typeNoun == "NN":
         if noun[0] in 'aeiou':
             noun = "an " + noun
         else:
             noun = "a " + noun
     
-    # 2 of 3 times, we are gonna pick        
-    if rndom.randrange(0, 3, 1)==0:  
+    # 1 of 4 times, we are gonna pick a random thingy       
+    if rndom.randrange(0, 4, 1)==0:  
         listSent = getFromTag("generic")
         sent = listSent[rndom.randrange(0, len(listSent), 1)]
+        
+        if noun =="":
+            noun = rndom.choice(("You", "Ronald Mac Donald", "cat", "unicorns"))
         
         sent = re.sub("@NOUN", noun, sent)
         sent = re.sub("@PRONOUN", pronoun, sent)
@@ -287,19 +330,25 @@ def generateAnswerToAffirmation(userInput, listWord):
         return sent
 
     if pronoun == "":
-        pronoun = rndom.choice(("You ", "I "))
+        pronoun = rndom.choice(("You", "I"))
+
+    if adjective != "":
+        return rndom.choice(( ("I'am " +  adjective + " too"), ("why" + verb + " "+pronoun+" "+adjective)))
+    
+    if verb == "":
+        rndom.choice(("", "like", "kill", "eat"))
     
     if verb == "" or lemmeVerb == "be":
-        if pronoun == "I":
+        if pronoun == "I" or pronoun == "i":
             answer += "am "
-        elif(pronoun == "he" or pronoun == "she" or pronoun == "it"):
+        elif(pronoun.lower() == "he" or pronoun.lower() == "she" or pronoun.lower() == "it"):
             answer += "is "
         else:
             answer += "are "
-        answer += pronoun
+        answer += pronoun + " "
         
         if adjective != "":
-            answer += adjective
+            answer += adjective + " "
         else:
             answer += rndom.choice(("...", "fat", "stupid", "idiot", "naive", "nice", "interested in irony", "awesome"))
         answer += "?"
@@ -308,7 +357,12 @@ def generateAnswerToAffirmation(userInput, listWord):
         answer += rndom.choice((" ", "n't "))
         answer += pronoun + " "
         answer += verb + " "
-        answer += rndom.choice(("like pizza with pineapple", "as Trump", "in a way comprable to Twittler", "dancing"))
+        if verb == "do":
+            answer += rndom.choice(("exercise", "sport, you're fat", "massmurder", "your homework everyday", ))
+        elif verb == "go":
+            answer += rndom.choice(("to the moon", "under the sea", "on youtube", "dancing", "buy some pate en croute"))
+        else:
+            answer += rndom.choice(("pizza with pineapple", "Trump", "in a way comprable to Twittler", "dancing", "baguette"))
     
         
     return answer;
@@ -385,8 +439,8 @@ def extractTagFromLine(line):
     temp =[]
     temp = line.split("/>")
     temp[0] = temp[0].replace("<", "", 1)
-    temp[0] = temp[0].split("|")
-    tagLine = TagAndLine(temp[0], temp[1])
+    lisTag = temp[0].split("|")
+    tagLine = TagAndLine(lisTag, temp[1])
     return tagLine
 
 
@@ -441,28 +495,11 @@ for x in dataTag:
 """
 
 print("Hajime!")
-"""
-print("Hello, I'm Glados")
-userIn = "Hello"
-listWord = nlp(u"%s"%(userIn, ))
-userIn = userIn.lower()
-
-userIn = tokenise(userIn, "en")
-sentence = "Hello @PN, I'm worst-friend bot."
-
-for np in listWord.noun_chunks:
-    print(np.text, np.root.text, np.root.dep_, np.root.head.text)
-    
-for word in listWord:
-    print(word.text, word.lemma, word.lemma_, word.tag, word.tag_, word.pos, word.pos_)
-
-print(existTags(userIn, listWord))
-"""
 
 history = ""
 
 while True:   
-    userInput = input("You : ");
+    userInput = input("You >> ");
     if(userInput == "stop"):
         break;
     

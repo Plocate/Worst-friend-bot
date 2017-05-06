@@ -13,14 +13,14 @@
 
 #@NOUN,@VERB, adn @PRONOUN are special, use solely for generic
  
-<hello|hi|greetings|sup|what's up|yo/>Hi @PN, I'm DAD 
-<hello|hi|greetings|sup|what's up|yo/>Hello @PN, I'm worst-friend bot.
-<hello|hi|greetings|sup|what's up|yo/>Hello World!
-<hello|hi|greetings|sup|what's up|yo/>Hello
-<hello|hi|greetings|sup|what's up|yo/>Hi
-<hello|hi|greetings|sup|what's up|yo/>Greetings
-<hello|hi|greetings|sup|what's up|yo/>Sup
-<hello|hi|greetings|sup|what's up|yo/>What's up, buttercup
+<hello | hi |greetings|sup |what's up| yo />Hi @PN, I'm DAD 
+<hello | hi |greetings|sup |what's up| yo />Hello @PN, I'm worst-friend bot.
+<hello | hi |greetings|sup |what's up| yo />Hello World!
+<hello | hi |greetings|sup |what's up| yo />Hello
+<hello | hi |greetings|sup |what's up| yo />Hi
+<hello | hi |greetings|sup |what's up| yo />Greetings
+<hello | hi |greetings|sup |what's up| yo />Sup
+<hello | hi |greetings|sup |what's up| yo />What's up, buttercup
 
 <bye|sayonara/>Good bye @PN
 <bye|sayonara/>Adieu!
@@ -51,12 +51,16 @@
 <trust you|generic/>Trust me
 <one/>Which one?
 <do it/>How?
-<bad|idiot|stupid|dumb|/>You are not a good person. You know that, right? Good people don't end up here.
-<sex|boy|girl/>Are you a boy or a girl?
+<bad|idiot|stupid|dumb/>You are not a good person. You know that, right? Good people don't end up here.
+<are bad|idiot|stupid|dumb/>I don't care
+<are bad|are an idiot|are idiot|are stupid|are dumb/>So why do you talk to me?
+<is bad|is an idiot|is stupid|is dumb/>I don't think @SN is that stupid. You...
+<gender|sex|boy|girl/>Are you a boy or a girl?
+<gender|sex|boy|girl/>I'm a bot, i don't care about that
 <generic/>What do you think of Trump?
 <generic/>Tu connais Laink et Terracid?
-How old are you?
-Are you sure?
+<generic/>How old are you?
+<generic/>Are you sure?
 
 
 <you want>My goal is to push you to your mental limits.
@@ -68,12 +72,12 @@ Question usually have a question mark at the end of the sentence...
 
 Hu huh?
 Hu huh...
-I have no idea.
-
+<Do you think/>I have no idea.
+<Do you think/>No, I don't think
 <hotel>Hotel? Trivago
 
 
-You died
+<try yo/>You died
 Everybody dies
 Spaaaaaaaaaaaaaaaaace!
 Mada mada
@@ -90,7 +94,7 @@ All your bases are belong to us.
 
 Nothing is more badass than treating a woman in respect.
 It's dangerous to go alone.
-The first rule of fight cluc is: you do not talk about fight club.
+<fight club/>The first rule of fight club is: you do not talk about fight club.
 The internet is for unicorns.
 To infinity... and beyond!
 May the force be with you.
@@ -194,27 +198,31 @@ Nom de dieu de putain de bordel de merde de saloperie de connard d'enculé de ta
 Eve, Plant.
 I'am your father.
 We said that we would not talk about moms...
-<mom|mother/>Yo mama so fat shes on both sides of the family.
-<mama/>Your mum is fat.
-<mama/>Yo momma so fat she sued xbox 360 for guessing her weight.
+<mom|mother|mama/>Yo mama so fat shes on both sides of the family.
+<mom|mother|mama/>Your mum is fat.
+<who are you|mom|mother|mama/>Your mum.
+<mom|mother|mama/>Yo momma so fat she sued xbox 360 for guessing her weight.
 Did you put your name in the goblet of fire?
 Philippe! Je sais ou tu t'cache.
-Heroes never die.
+<heroes/>Heroes never die.
 DIE DIE DIE.
 I have got you in my sight!
 Hello world.
-Experience tranquility ... in death.
-JUSTICE RAINS FROM ABOVE!
-Ryu ga waga teki wo kurau!
-It's high noon.
+<tranquility/>You can experience tranquility ... in death.
+<justice/>JUSTICE RAINS FROM ABOVE!
+<angry japanese|ryu/>Ryu ga waga teki wo kurau!
+<what is it|it's/>It's high noon.
+<what is it|it's/>It's a me Mario
+<what is it|it's/>a computer, you really need new glasses
+<what is it|it's/>Your new friend, Wors... Friend-Bot
 Fire in the hole.
-Personne n'échappe à mon regard.
-No one can hide from my sight.
+<invisible/>Personne n'échappe à mon regard.
+<invisible/>No one can hide from my sight.
 Nerf this!
 Cease your resistance.
-I will look for you, i will find you and i will kill you.
+<invisible/>I will look for you, i will find you and i will kill you.
 ET phone home.
-No, THIS IS Sparta!
+<this is|this is madness/>No, THIS IS Sparta!
 Under the sea, under the sea...
 It's alive, it's alive!
 This isn't brave . It's murder What did I ever do to you?
