@@ -194,7 +194,7 @@ def build_adj(listWord):
         
     for w in listWord:
         if w.tag_ == "JJ" or w.pos_ == "JJR" or w.pos_ == "JJS":
-            print(w.text)
+            #print(w.text)
             return w.text
     
     return ""
@@ -541,6 +541,7 @@ while True:
         if w.lemma >= 776980:
             sentenceType = "nonsense"
     
+    print(sentenceType)
     if userInLow == history:
         print("WFB << " + rndom.choice(["Repeating yourself dude","Alzeimer is watching you",
                            "stop harassin me","loosing my time...", "and again"]))
