@@ -83,7 +83,7 @@ def replaceAt(answer, userInput, listWord):
                     if np.root.dep_ == "nsubj":
                         target = np.root.text
                         break;
-            elif(res[1] == "attr"):
+            elif(res[0] == "PROPN" or res[1] == "attr"):
                 for np in listWord.noun_chunks:
                     print( np.root.text + " : " + np.root.dep_)
                     if np.root.dep_ == "attr":
@@ -296,7 +296,7 @@ corresAt = {}
 corresAt = fillCorres("corresAt.txt")
 
 #parseDictionary defined in lecture.py
-dico = parseDictionary("enlex-0.1.mlex")
+#dico = parseDictionary("enlex-0.1.mlex")
 """
 for x in dataTag:
     print("list : ")
@@ -306,7 +306,8 @@ for x in dataTag:
     print()
 """
 
-print("Hajime!") 
+print("Hajime!")
+"""
 print("Hello, I'm Glados")
 userIn = "Hello, I'm Glados"
 userIn = userIn.lower()
@@ -314,14 +315,14 @@ listWord = nlp(u"%s"%(userIn, ))
 userIn = tokenise(userIn, "en")
 sentence = "Hello @PN, I'm worst-friend bot."
 
-
 print(existTags(userIn, listWord))
+"""
 
-while False:
-    
-    #Traitement de userLine: separation, tagging des différents tokens    
+while True:   
     userInput = input("You : ");
-    
+    if(userInput == "stop"):
+        break;
+		
     #stopWords = ["then", "therefore", "at", "of", "the", "thus", "so", "consequently"]
     questionWords = ["which", "what", "when", "who", "why", "where", "how", "whose", "whom", "am", "are", "is", "was", "were", "would", "can", "could", "shall", "will", "might", "must", "may", "do", "did"]
     
@@ -330,25 +331,37 @@ while False:
     
     
     userInput = userInput.lower()
-    tokens = tokenise(userInput, "en")
-    for t in tokens:
-    	#if t in stopWords:
-    	#	tokens.remove(t)			
-    	if t == "?":
-    		sentenceType = "question"
+    tokens = tokenise(userInput,"en")
     
-    		
-    #listWord = tagToken(tokens, dico)
-    #listWord = setWordRole(listWord)
     
-    #If the bot doesn't know one of the words, it will send a premade answer
-    for w in listWord:
-    	if w.wordType == "UKN":
-    		#print("TEST "+w.text + " "+w. )
-    		sentenceType = "nonSense"    
+    userInput = nlp(u"%s"%(userInput, ))
+    subjects = []
+    for np in userInput.noun_chunks:
+        print(np.text, np.root.text, np.root.dep_, np.root.head.text)
+        if np.root.dep_ == "nsubj":
+            subjects.append(tokenise(np.text, "en"))
+            
+
+    for idx in range(len(userInput)):
+        if(userInput[idx].pos_ == "VERB"):
+            for idy in range(len(subjects)):
+                if subjects[idy][0] == userInput[idx+1].text:
+                    sentenceType = "question"
+                    for idz in range(len(subjects[idy])):
+                        if(subjects[idy][idz] != userInput[idz+idx+1].text):
+                            sentenceType = "affirmation"
+        print(userInput[idx].text, userInput[idx].lemma, userInput[idx].lemma_, userInput[idx].tag, userInput[idx].tag_, userInput[idx].pos, userInput[idx].pos_)
+
+    if userInput[len(userInput)-1].text == "?":
+        sentenceType = "question" 
         
-    print("WFB << " + generateAnswer(userInput, sentenceType, listWord))
-    if "stop" in tokens:
-        break
+    for w in userInput:
+        if w.lemma == 776980:
+            sentenceType = "nonsense"
+    
+    print(sentenceType)
+    
+    print("sentence : " + sentenceType)
+    #print("WFB << " + generateAnswer(userInput, sentenceType, listWord))
 
 print ("Hello World\n")
