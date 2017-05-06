@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (MiKTeX 2.9.6300 64-bit) (preloaded format=pdflatex 2017.5.6)  6 MAY 2017 15:37
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (MiKTeX 2.9.6300 64-bit) (preloaded format=pdflatex 2017.5.6)  6 MAY 2017 17:18
 entering extended mode
 **./latex_template.tex
 (latex_template.tex
@@ -693,53 +693,52 @@ LaTeX Font Info:    Try loading font information for U+msb on input line 52.
 
 (C:\Users\utilisateur\Documents\Latex\tex\latex\amsfonts\umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
-)
-Underfull \hbox (badness 10000) in paragraph at lines 104--105
+) [1
+
+{C:/ProgramData/MiKTeX/2.9/pdftex/config/pdftex.map}]
+Underfull \hbox (badness 10000) in paragraph at lines 114--115
 
  []
 
-[1
-
-{C:/ProgramData/MiKTeX/2.9/pdftex/config/pdftex.map}]
-LaTeX Font Info:    Try loading font information for OMS+cmr on input line 142.
- (C:\Users\utilisateur\Documents\Latex\tex\latex\base\omscmr.fd
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 152.
+(C:\Users\utilisateur\Documents\Latex\tex\latex\base\omscmr.fd
 File: omscmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 142.
-
-<myimage.jpg, id=15, 260.975pt x 194.7275pt>
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 152.
+ <myimage.jpg, id=14, 260.975pt x 194.7275pt>
 File: myimage.jpg Graphic file (type jpg)
- <use myimage.jpg>
-Package pdftex.def Info: myimage.jpg used on input line 154.
+
+<use myimage.jpg>
+Package pdftex.def Info: myimage.jpg used on input line 164.
 (pdftex.def)             Requested size: 100.0pt x 74.61523pt.
 File: myimage.jpg Graphic file (type jpg)
  <use myimage.jpg>
-Package pdftex.def Info: myimage.jpg used on input line 159.
+Package pdftex.def Info: myimage.jpg used on input line 169.
 (pdftex.def)             Requested size: 20.0pt x 14.92186pt.
- [2 <./myimage.jpg>] (latex_template.aux) ) 
+ [2 <./myimage.jpg>] [3] (latex_template.aux) ) 
 Here is how much of TeX's memory you used:
- 4546 strings out of 493328
- 61527 string characters out of 3135254
- 141149 words of memory out of 3000000
- 7979 multiletter control sequences out of 15000+200000
+ 4547 strings out of 493328
+ 61535 string characters out of 3135254
+ 142149 words of memory out of 3000000
+ 7980 multiletter control sequences out of 15000+200000
  11970 words of font info for 47 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
- 39i,11n,43p,467b,439s stack positions out of 5000i,500n,10000p,200000b,50000s
-<C:/Users/utilisateur/Documents/Latex/fonts/type1/public/amsfonts/cm/cmbx10.p
-fb><C:/Users/utilisateur/Documents/Latex/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C:/Users/utilisateur/Documents/Latex
-/fonts/type1/public/amsfonts/cm/cmex10.pfb><C:/Users/utilisateur/Documents/Latex/fonts/type1/public/amsfonts/cm/cmmi10.p
-fb><C:/Users/utilisateur/Documents/Latex/fonts/type1/public/amsfonts/cm/cmmi7.pfb><C:/Users/utilisateur/Documents/Latex/
-fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Users/utilisateur/Documents/Latex/fonts/type1/public/amsfonts/cm/cmr12.pfb>
-<C:/Users/utilisateur/Documents/Latex/fonts/type1/public/amsfonts/cm/cmr17.pfb><C:/Users/utilisateur/Documents/Latex/fon
-ts/type1/public/amsfonts/cm/cmr5.pfb><C:/Users/utilisateur/Documents/Latex/fonts/type1/public/amsfonts/cm/cmr7.pfb><C:/U
-sers/utilisateur/Documents/Latex/fonts/type1/public/amsfonts/cm/cmr8.pfb><C:/Users/utilisateur/Documents/Latex/fonts/typ
-e1/public/amsfonts/cm/cmr9.pfb><C:/Users/utilisateur/Documents/Latex/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users
-/utilisateur/Documents/Latex/fonts/type1/public/amsfonts/cm/cmsy5.pfb><C:/Users/utilisateur/Documents/Latex/fonts/type1/
-public/amsfonts/cm/cmtt10.pfb>
-Output written on latex_template.pdf (2 pages, 174629 bytes).
+ 39i,12n,43p,652b,439s stack positions out of 5000i,500n,10000p,200000b,50000s
+<C:/Users/utilisateur/Documents/Latex/fonts/type1/public/amsfonts/cm/cmbx
+10.pfb><C:/Users/utilisateur/Documents/Latex/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C:/Users/utilisateur/Documents/L
+atex/fonts/type1/public/amsfonts/cm/cmex10.pfb><C:/Users/utilisateur/Documents/Latex/fonts/type1/public/amsfonts/cm/cmmi
+10.pfb><C:/Users/utilisateur/Documents/Latex/fonts/type1/public/amsfonts/cm/cmmi7.pfb><C:/Users/utilisateur/Documents/La
+tex/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Users/utilisateur/Documents/Latex/fonts/type1/public/amsfonts/cm/cmr12.
+pfb><C:/Users/utilisateur/Documents/Latex/fonts/type1/public/amsfonts/cm/cmr17.pfb><C:/Users/utilisateur/Documents/Latex
+/fonts/type1/public/amsfonts/cm/cmr5.pfb><C:/Users/utilisateur/Documents/Latex/fonts/type1/public/amsfonts/cm/cmr7.pfb><
+C:/Users/utilisateur/Documents/Latex/fonts/type1/public/amsfonts/cm/cmr8.pfb><C:/Users/utilisateur/Documents/Latex/fonts
+/type1/public/amsfonts/cm/cmr9.pfb><C:/Users/utilisateur/Documents/Latex/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/U
+sers/utilisateur/Documents/Latex/fonts/type1/public/amsfonts/cm/cmsy5.pfb><C:/Users/utilisateur/Documents/Latex/fonts/ty
+pe1/public/amsfonts/cm/cmtt10.pfb>
+Output written on latex_template.pdf (3 pages, 179408 bytes).
 PDF statistics:
- 70 PDF objects out of 1000 (max. 8388607)
+ 73 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
  6 words of extra memory for PDF output out of 10000 (max. 10000000)
 
