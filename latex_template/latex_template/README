@@ -1,0 +1,10 @@
+
+In this folder you will find a template for a report in LaTeX.  To compile the .tex file, go to the
+command line and type:
+
+pdflatex path/to/your/file.tex
+
+The PDF file will be created in the current folder, as long as there are no errors in the .tex file!
+
+
+
