@@ -1,10 +1,10 @@
-#!/usr/bin/python3
 # -*- coding: utf-8 -*-
 """
-Created on Tue Apr 25 14:57:18 2017
+Created on Sat May  6 02:23:01 2017
 
-@author: paul.meunier
+@author: utilisateur
 """
+
 
 import re
 import random as rndom
@@ -45,28 +45,6 @@ def setWordRole(listWord):
             
 
     return listWord
-
-#Is called if the useInput is recognised as a question
-def generateAnswerToQuestion(userInput, listWord):
-    sentence=""
-    for x in userInput:
-         sentence += x+" "
-    
-    sentence = nlp(u"%s" % (sentence,))
-    
-    #for np in sentence.noun_chunks:
-        #print(np.text, np.root.text, np.root.dep_, np.root.head.text)
-    
-
-    return answer
-    
-#Is called if the userInput is not a question and is correct
-#Can generate a question
-def generateAnswerToAffirmation(userInput, listWord):
-    
-    
-    
-    return answer;
 
 
 #Function is called if there is a word that isn't well written 
@@ -146,24 +124,8 @@ def extractTagFromLine(line):
 
 
 
-#Call other function to generate an answer depending on the input
-def generateAnswer(userInput, sentenceType, listWord):
-
-    if sentenceType == "question":
-        answer = generateAnswerToQuestion(userInput, listWord)
-    elif sentenceType == "affirmation":
-        answer = generateAnswerToAffirmation(userInput, listWord)
-    elif sentenceType == "nonsense":
-        answer = pickOneNonSense(userInput, listWord)
-        
-    return answer
-    
-
 #load spacy, to use in function call: global nlp
 nlp = spacy.load('en')
-
-#Chemin vers le lexicon
-pathLexicon="enlex-0.1.mlex"
 
 #Chemin vers le fichier txt contenant toutes les phrases préconstruites
 pathData="DatabaseAnswer.txt"
@@ -184,9 +146,10 @@ database, dataTag = extractData(pathData);
 print("Hajime!") 
 while True:
     
-    #Traitement de userLine: separation, tagging des différents tokens    
+    #Traitement de userLine: separation, tagging des différents tokens  
     userInput = input("You : ");
-    
+    if(userInput == "stop"):
+        break;
     #stopWords = ["then", "therefore", "at", "of", "the", "thus", "so", "consequently"]
     questionWords = ["which", "what", "when", "who", "why", "where", "how", "whose", "whom", "am", "are", "is", "was", "were", "would", "can", "could", "shall", "will", "might", "must", "may", "do", "did"]
     
@@ -195,25 +158,27 @@ while True:
     
     
     userInput = userInput.lower()
-    tokens = tokenise(userInput, "en")
-    for t in tokens:
-    	#if t in stopWords:
-    	#	tokens.remove(t)			
-    	if t == "?":
-    		sentenceType = "question"
-    
-    		
-    #listWord = tagToken(tokens, dico)
-    #listWord = setWordRole(listWord)
-    
-    #If the bot doesn't know one of the words, it will send a premade answer
-    for w in listWord:
-    	if w.wordType == "UKN":
-    		#print("TEST "+w.text + " "+w. )
-    		sentenceType = "nonSense"    
-        
-    print("WFB << " + generateAnswer(userInput, sentenceType, listWord))
-    if "stop" in tokens:
-        break
+    userInput = nlp(u"%s"%(userInput, ))
+    subjects = []
+    for np in userInput.noun_chunks:
+        print(np.text, np.root.text, np.root.dep_, np.root.head.text)
+        if np.root.dep_ == "nsubj":
+            subjects.append(tokenise(np.text, "en"))
+            
 
-print ("Hello World\n")
+    for idx in range(len(userInput)):
+        if(userInput[idx].pos_ == "VERB"):
+            for idy in range(len(subjects)):
+                if subjects[idy][0] == userInput[idx+1].text:
+                    sentenceType = "question"
+                    for idz in range(len(subjects[idy])):
+                        if(subjects[idy][idz] != userInput[idz+idx+1].text):
+                            sentenceType = "affirmation"
+        print(userInput[idx].text, userInput[idx].lemma, userInput[idx].lemma_, userInput[idx].tag, userInput[idx].tag_, userInput[idx].pos, userInput[idx].pos_)
+        
+    if userInput[len(userInput)-1].text == "?":
+        sentenceType = "question"
+    print(sentenceType)
+    # I I nsubj like
+    # green eggs eggs dobj like
+    # ham ham conj eggs

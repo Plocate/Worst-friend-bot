@@ -10,18 +10,6 @@ class Bigram:
 		self.s1 = s1
 		self.s2 = s2
 
-class typeTopic:
-	
-    def __init__(self, text, wordTypeT, subType):
-        self.text = text
-        self.wordType = wordTypeT
-        self.subType = subType
-        self.parseType = ""
-    
-    def setParseType(self, parseTypeT):
-        self.parseType = parseTypeT
-        
-		
 
 
 def read_paragraph_file(nomfichier):
