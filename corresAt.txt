@@ -1,0 +1,17 @@
+# @ON : token which show an expression which needs to be replaced by a object name
+# @SN : token which show an expression which needs to be replaced by a subject name
+# @AD : ...by an adjective
+# @QO : ...by a part of the user sentence.
+# @VB : ...by a verb
+# @UT : token which show an expression which needs to be replaced by something the bot didn't understand
+#
+#Refer to this page :https://spacy.io/docs/usage/pos-tagging#pos-tagging-english
+
+#@STthing|POS(see link above)|relation in the sentence:
+@PN:PROPN|attr
+@ON:NOUN|dobj
+@SN:NOUN|nsubj
+@AD:ADJ|!
+@QO:GROUP|!
+@VB:VERB|!
+@UT:UKN|

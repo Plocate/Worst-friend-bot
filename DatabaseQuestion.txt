@@ -1,14 +1,4 @@
-# _@CN_ : token which show an expression which needs to be replaced by a common name
-# _@SN_ : token which show an expression which needs to be replaced by a surname
-# _@MT_ : ...by a language
-# _@AD_ : ...by an adjective
-# _@QO_ : ...by a part of the user sentence.
-# _@VB_ : ...by a verb
-# _@CJ_ : ...by a conjugated verb
-# _@UT_ : token which show an expression which needs to be replaced by something the bot didn't understand
-# _§_ : token which show an expression has already been used
-# _#TAG_ : Shows a non-exhaustive list in which case this answer can be used.
-# | : Separate two token with the same meaning
+
 
 
 
