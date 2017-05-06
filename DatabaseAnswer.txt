@@ -11,7 +11,7 @@
 # <x|y|.../> : Shows a non-exhaustive list in which case this answer can be used.
 # | : Separate two token with the same meaning
 
-#@NOUN,@VERB, adn @PRONOUN are special, use solely for generic
+
  
 <hello|hi|greetings|sup|what's up|yo/>Hi @PN, I'm DAD 
 <hello|hi|greetings|sup|what's up|yo/>Hello @PN, I'm worst-friend bot.
@@ -36,43 +36,37 @@
 <nonsense/>What?
 <nonsense/>You do not know hot to speak english, do you?
 
-<place|Paris|Versailles/>Where?
+<place/>Where?
+<place/>Where is @CN|@SN ?
 
 <generic/>What are you doing?
-<generic/>Do you really think you are an expert in @NOUN ?
-<generic/>What do you know about @NOUN?
-<generic/>My last journey to the moon was not enough to forget @NOUN
-<generic/>Do @PRONOUN know where @NOUN rest?
-<generic/>Tell me more about it!
-<generic/>Tell me more about @NOUN !
-<generic/>Frankly, my dear, I don't give a damn.
-<generic/>I don't care.
 <name|generic/>What's your name?
-<trust you|generic/>Trust me
-<one/>Which one?
-<do it/>How?
-<bad|idiot|stupid|dumb|/>You are not a good person. You know that, right? Good people don't end up here.
-<sex|boy|girl/>Are you a boy or a girl?
-<generic/>What do you think of Trump?
-<generic/>Tu connais Laink et Terracid?
+Which?
+Which one?
+How?
+You are not a good person. You know that, right? Good people don't end up here.
+Are you a boy or a girl?
+What do you think of Trump?
+Tu connais Laink et Terracid?
 How old are you?
 Are you sure?
 
 
 <you want>My goal is to push you to your mental limits.
-<do you think/>I don't think so
-<won't agree/>I'm gonna make him an offer he can't refuse.
-<spanish|french|russian/>I don't speak idiot...
-<suicide/>If you're going to kill yourself, dot it somewhere else please!
+I don't think so
+I'm gonna make him an offer he can't refuse.
+I don't speak idiot...
+If you're going to kill yourself, dot it somewhere else please!
 Question usually have a question mark at the end of the sentence...
-
+Tell me more about it!
 Hu huh?
 Hu huh...
 I have no idea.
 
 <hotel>Hotel? Trivago
 
-
+Trust me
+Man? Triggered
 You died
 Everybody dies
 Spaaaaaaaaaaaaaaaaace!
@@ -94,6 +88,8 @@ The first rule of fight cluc is: you do not talk about fight club.
 The internet is for unicorns.
 To infinity... and beyond!
 May the force be with you.
+Frankly, my dear, I don't give a damn.
+I don't care.
 I'm gonna make him an offer he can't refuse.
 You don't understand! I coulda had class. I coulda been a contender. I could've been somebody, instead of a bum, which is what I am.
 Toto, I've a feeling we're not in Kansas anymore.

@@ -151,76 +151,14 @@ def setWordRole(listWord):
 
     return listWord
 
-#Search a valid pronoun which could be user in an answer
-def build_pronoun(listWord):
-
-    for w in listWord:
-        if w.tag_ == "PRP":
-            if w.text.lower == 'you':
-                return "I", 
-            if w.text.lower == 'i':
-                return "you"
-            if w.text.lower == 'he':
-                return 'he'
-            if w.text.lower == 'she':
-                return 'she'
-            if w.text.lower == 'it':
-                return 'it'
-            
-    for np in listWord.noun_chunks:
-        if np.root.dep_ == 'nsubj':
-            return np.text
-    
-    return ""
-
-#Search a valid noun which could be user in an answer
-def build_noun(listWord):
-    
-    for np in listWord.noun_chunks:
-        if np.root.dep == "pobj" or np.root.dep == "dobj":
-            for w in listWord:
-                if np.text == w.text:
-                    return np.text + np.root.head.text, w.tag_
-        
-    for w in listWord:
-        if w.pos_ == "NOUN" or w.pos_ == "PROPN":
-            return w.text, w.tag_
-        
-    return "", ""
-
-#Search a valid adj which could be user in an answer
-def build_adj(listWord):
-        
-    for w in listWord:
-        if w.pos_ == "JJ":
-            return w.text
-    
-    return ""
-
-#Search a valid verb which could be user in an answer
-#We will try to do a a bit of time concordance
-def build_verb(listWord):
-    for np in listWord.noun_chunks:
-        if np.root.dep_ == 'nsubj':
-            for w in listWord:
-                if w.text == np.root.head.text:
-                    #si un verbe est attaché au sujet, on retourne le lemma
-                    return w.lemma_
-    
-    #Sinon on chercher un autre verbe dans la phrase
-    for w in listWord:
-        if w.pos_ =="VERB":
-            return w.lemma_
-        
-    #On a pas trouvé de verbe
-    return "", ""
-
 #Is called if the useInput is recognised as a question
 def generateAnswerToQuestion(userInput, listWord):
     answer =""
     sentence = concatStr(userInput)
     
     sentence = nlp(u"%s" % (sentence,))
+    
+   
     
 
     return answer
@@ -233,84 +171,11 @@ def generateAnswerToAffirmation(userInput, listWord):
     sentence = concatStr(userInput)
     
     doc = nlp(u"%s" % (sentence,))
-    
-    #tag will make up for simple stuff like greeting or saying good bye
     if(existTags(userInput, listWord)):
         return existTags(userInput, listWord)
     
-    #If the user talk about the bot
     
-    #We will try to build a generic answer
-    pronoun = build_pronoun(listWord)
-    noun, typeNoun = build_noun(listWord)
-    adjective = build_adj(listWord)
-    verb = build_verb(listWord)
-    lemmeVerb = verb
-        
-    if verb != "":
-        if verb == "be":
-            if pronoun == "I":
-                verb== "am "
-            elif(pronoun == "he" or pronoun == "she" or pronoun == "it"):
-                verb== "is "
-            else:
-                verb== "are "
-        elif verb == "have":
-            if(pronoun == "he" or pronoun == "she" or pronoun == "it"):
-                verb=="has "
-            else:
-                verb== "have "
-        elif verb == "go":
-            if(pronoun == "he" or pronoun == "she" or pronoun == "it"):
-                verb== "goes "
-            else:
-                verb+= "go "
-        else:
-            if(pronoun == "he" or pronoun == "she" or pronoun == "it"):
-                verb+= verb+"s "
-
-    if noun != "":
-        if noun[0] in 'aeiou':
-            noun = "an " + noun
-        else:
-            noun = "a " + noun
     
-    # 2 of 3 times, we are gonna pick        
-    if rndom.randrange(0, 3, 1)==0:  
-        listSent = getFromTag("generic")
-        sent = listSent[rndom.randrange(0, len(listSent), 1)]
-        
-        sent = re.sub("@NOUN", noun, sent)
-        sent = re.sub("@PRONOUN", pronoun, sent)
-        sent = re.sub("@VERB", verb, sent)
-    
-        return sent
-
-    if pronoun == "":
-        pronoun = rndom.choice("You", "I")
-    
-    if verb == "" or lemmeVerb == "be":
-        if pronoun == "I":
-            answer += "am "
-        elif(pronoun == "he" or pronoun == "she" or pronoun == "it"):
-            answer += "is "
-        else:
-            answer += "are "
-        answer += pronoun
-        
-        if adjective != "":
-            answer += adjective
-        else:
-            answer += rndom.choice(("...", "fat", "stupid", "idiot", "naive", "nice", "interested in irony", "awesome"))
-        answer += "?"
-    else:
-        answer += "Does" if (pronoun == "he" or pronoun == "she" or pronoun == "it") else "Do"
-        answer += rndom.choice((" ", "n't "))
-        answer += pronoun + " "
-        answer += verb + " "
-        answer += rndom.choice(("like pizza with pineapple", "as Trump", "in a way comprable to Twittler", "dancing"))
-    
-        
     return answer;
 
 
@@ -405,7 +270,9 @@ def generateAnswer(userInput, sentenceType, listWord):
     
 
 #load spacy, to use in function call: global nlp
+print("loading dictionary...")
 nlp = spacy.load('en')
+print("dictionay loaded !")
 
 #Chemin vers le lexicon
 pathLexicon="enlex-0.1.mlex"
@@ -457,12 +324,13 @@ for word in listWord:
 print(existTags(userIn, listWord))
 """
 
-history = ""
-
 while True:   
     userInput = input("You : ");
     if(userInput == "stop"):
         break;
+    if(len(userInput) == 0):
+        continue;
+		
     #stopWords = ["then", "therefore", "at", "of", "the", "thus", "so", "consequently"]
     questionWords = ["which", "what", "when", "who", "why", "where", "how", "whose", "whom", "am", "are", "is", "was", "were", "would", "can", "could", "shall", "will", "might", "must", "may", "do", "did"]
     
@@ -471,7 +339,6 @@ while True:
     
     
     userInLow = userInput.lower()
-    
     userInput = nlp(u"%s"%(userInput, ))
     tokens = tokenise(userInLow,"en")
     
@@ -487,13 +354,13 @@ while True:
     for idx in range(len(userInput)):
         if(userInput[idx].pos_ == "VERB"):
             for idy in range(len(subjects)):
-                if subjects[idy][0] == userInput[idx+1].text:
+                if idx+1< len(userInput) and subjects[idy][0] == userInput[idx+1].text:
                     sentenceType = "question"
                     for idz in range(len(subjects[idy])):
-                        if(subjects[idy][idz] != userInput[idz+idx+1].text):
+                        if(idz+idx+1>= len(userInput) or subjects[idy][idz] != userInput[idz+idx+1].text):
                             sentenceType = "affirmation"
-        print(userInput[idx].text, userInput[idx].lemma, userInput[idx].lemma_, userInput[idx].tag, userInput[idx].tag_, userInput[idx].pos, userInput[idx].pos_)
-        
+        #print(userInput[idx].text, userInput[idx].lemma, userInput[idx].lemma_, userInput[idx].tag, userInput[idx].tag_, userInput[idx].pos, userInput[idx].pos_)
+
     if userInput[len(userInput)-1].text == "?":
         sentenceType = "question" 
         
@@ -501,13 +368,7 @@ while True:
         if w.lemma >= 776980:
             sentenceType = "nonsense"
     
-    print(sentenceType)
-    
     print("sentence : " + sentenceType)
-    if userInLow == history:
-        print(rndom.choice("Repeating yourself dude","Alzeimer is watching you",
-                           "stop harassin me","loosing my time...", "and again"))
-    else:
-        print("WFB << " + generateAnswer(tokens, sentenceType, userInput))
-    history = userInLow
+    print("WFB << " + generateAnswer(tokens, sentenceType, userInput))
+
 print ("Hello World\n")
