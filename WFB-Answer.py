@@ -213,7 +213,7 @@ def build_verb(listWord):
             return w.lemma_
         
     #On a pas trouvé de verbe
-    return "", ""
+    return ""
 
 #Is called if the useInput is recognised as a question
 def generateAnswerToQuestion(userInput, listWord):
@@ -267,7 +267,7 @@ def generateAnswerToAffirmation(userInput, listWord):
                 verb+= "go "
         else:
             if(pronoun == "he" or pronoun == "she" or pronoun == "it"):
-                verb+= verb+"s "
+                verb= verb+"s "
 
     if noun != "":
         if noun[0] in 'aeiou':
@@ -287,7 +287,7 @@ def generateAnswerToAffirmation(userInput, listWord):
         return sent
 
     if pronoun == "":
-        pronoun = rndom.choice("You", "I")
+        pronoun = rndom.choice(("You ", "I "))
     
     if verb == "" or lemmeVerb == "be":
         if pronoun == "I":
