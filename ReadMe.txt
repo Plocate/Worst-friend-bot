@@ -1,5 +1,7 @@
 Thanks for downloading Worst Friend Bot!
 
+Python version 3.6
+
 The library "spacy" need to be installed. 
 Run: "pip install spacy"
 Visual C++ need to be installed (on windows)
