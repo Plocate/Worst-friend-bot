@@ -204,5 +204,3 @@ if __name__=="__main__":
     ygolds, ypreds = decode_set(logprobas_emission, logprobas_transition, tagset, test)
     precisiontest = evaluate(ygolds, ypreds, True)
     print("Precision on test set = "+str(precisiontest)+"\n")
-
-    

@@ -29,3 +29,5 @@ for w in userInput:
 		sentenceType = "nonSense"
 		
 print(sentenceType);
+     
+sent = "the cake is a lie.";
