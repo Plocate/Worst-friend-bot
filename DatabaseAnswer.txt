@@ -17,7 +17,10 @@
 <hello|hi|greetings|sup|what's up|yo/>Hello @PN, I'm worst-friend bot.
 <hello|hi|greetings|sup|what's up|yo/>Hello World!
 <hello|hi|greetings|sup|what's up|yo/>Hello
-<hello|hi|greetings|sup|what's up|yo/>
+<hello|hi|greetings|sup|what's up|yo/>Hi
+<hello|hi|greetings|sup|what's up|yo/>Greetings
+<hello|hi|greetings|sup|what's up|yo/>Sup
+<hello|hi|greetings|sup|what's up|yo/>What's up, buttercup
 
 <bye|sayonara/>Good bye @PN
 <bye|sayonara/>Adieu!
