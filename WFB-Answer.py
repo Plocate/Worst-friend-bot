@@ -484,7 +484,6 @@ while True:
     
     subjects = []
     for np in userInput.noun_chunks:
-        print(np.text, np.root.text, np.root.dep_, np.root.head.text)
         if np.root.dep_ == "nsubj":
             subjects.append(tokenise(np.text, "en"))
             
@@ -497,8 +496,7 @@ while True:
                     for idz in range(len(subjects[idy])):
                         if(idz+idx+1 >= len(userInput) or subjects[idy][idz] != userInput[idz+idx+1].text):
                             sentenceType = "affirmation"
-        print(userInput[idx].text, userInput[idx].lemma, userInput[idx].lemma_, userInput[idx].tag, userInput[idx].tag_, userInput[idx].pos, userInput[idx].pos_)
-        
+                            
     if userInput[len(userInput)-1].text == "?":
         sentenceType = "question" 
         
@@ -506,13 +504,9 @@ while True:
         if w.lemma >= 776980:
             sentenceType = "nonsense"
     
-    print(sentenceType)
-    
-    print("sentence : " + sentenceType)
     if userInLow == history:
-        print(rndom.choice("Repeating yourself dude","Alzeimer is watching you",
-                           "stop harassin me","loosing my time...", "and again"))
+        print("WFB << " + rndom.choice(["Repeating yourself dude","Alzeimer is watching you",
+                           "stop harassin me","loosing my time...", "and again"]))
     else:
         print("WFB << " + generateAnswer(tokens, sentenceType, userInput))
     history = userInLow
-print ("Hello World\n")

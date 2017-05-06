@@ -52,16 +52,29 @@
 \maketitle
 
 \section{Présentation du projet}
-Durant ces dernière semaines, nous avons travaillé à la réalisation d'un projet en binôme dans le cadre de notre au cours de Traitement Automatique des Langues. Ce projet consiste en la programmation d'un logiciel codé en python, qui propose de converser avec un bot. Ce bot, que nous avons nommé "Worst-friend bot"', répond la plupart du temps par des citations, des références, issues de la culture plus ou moins populaire.
+
+\subsection{Contexte}
+Durant ces dernières semaines, nous avons travaillé à la réalisation d'un projet en binôme dans le cadre de notre cours de Traitement Automatique des Langues. Il nous était demandé de concevoir un logiciel en Python, qui exploiterait diverses notions étudiées en cours, en TP, ou de manière autonome, telles que la tokenisation ou l'analyse sémantique de texte. Ce fut également l'occasion de se former au Python, un langage de programmation que nous avions peu utilisé jusque là, ainsi qu'à l'utilisation de GitHub pour gérer nos données, et à la rédaction d'un rapport en utilisant la langage LaTeX.
 
 
+\subsection{Objectif}
+Notre objectif initial était de permettre à l'utilisateur de converser avec un bot, que nous avons nommé Worst-friend bot, qui répondrait en utilisant principalement des citations ou des références à la culture plus ou moins populaire. Le but était également de lui donner un comportement antipathique, en lui fournissant un vocabulaire assez négatif, voire nonchalant, d'où le nom Worst-friend bot.
+
+\subsection{Déroulement du programme}
+Pour pouvoir utiliser le programme, il faut disposer d'un ordinateur doté de python 3, ainsi que de la bibliothèque spacy. Des indications pour l'installation de spacy sont indiquées dans le fichier ReadMe.txt. Exécutez le fichier WFB-Answer.py, attendez que le logiciel charge sa bibliothèque de mot, et le jeu peut commencer. L'utilisateur est invité à saisir une phrase, à laquelle l'ordinateur va répondre. Il pourra ensuite en proposer une autre, l'ordinateur répondra à son tour et ainsi de suite. Pour mettre fin au programme, écrivez seulement \og stop \fg{}.
+
+\section{Analyse de texte}
+	Pour pour voir répondre à l'utilisateur, le Worst-Friend Bot doit d'abord comprendre ce que celui-ci lui dit, la première étapes du programme consiste donc en l'analyse et le découpage des chaînes de caractères fournies par l'utilsateur, pour en déduire des informations pour son sens, et transmettre ses informations à la suite du programme.
+	
+\subsection{Tokenisation}
+	L
+
+\subsection{Ceci est une sous-section}
 On peut aussi {\small changer} {\large la taille} {\tiny du texte}.  Les tailles prédéfinies sont:
 {\tiny tiny}, {\scriptsize scriptsize}, {\footnotesize footnotesize}, {\small small}, {\normalsize
   normalsize}, {\large large} et {\Large Large}.
 
 On peut changer la couleur du texte \textcolor{red}{comme ça}.
-
-\subsection{Ceci est une sous-section}
 Voici pouvez faire des listes avec des puces:
 
 \begin{itemize}
@@ -174,5 +187,7 @@ Pour faire des équations alignées:
 
 Quelques templates: \url{https://www.latextemplates.com} \\
 Documentation: \url{https://www.latex-project.org}
+
+
 
 \end{document}
