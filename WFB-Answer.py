@@ -131,9 +131,6 @@ def existTags(userInput, listWord, opTag = ""):
     
     answer = listPoss[rndom.randrange(0, len(listPoss), 1)]
     
-    answer = "Hello @PN, I'm worst-friend bot."
-    print("answer at exist : " + answer)
-    
     return replaceAt(answer, userInput, listWord)
 
 #Uses spacy dependency parse to give a role to word in user input
@@ -183,21 +180,21 @@ def generateAnswerToAffirmation(userInput, listWord):
 
 
 #Function is called if there is a word that isn't well written 
-#or doesn't exist in the lexicon
+#or doesn't exist in the lexicon of spacy
 def pickOneNonSense(userInput, listWord):
     #this boolean is used to know if we already began to fill answer
     alreadyCompleted = False
     
     answer = ""
-    
+
     possibilities = []
     possibilities = getFromTag("nonsense")
     
     for word in listWord:
-        if word.soustype.find("UKN"):
+        if word.lemma == 776980:
             if len(possibilities) > 0 and not alreadyCompleted:
                 alreadyCompleted = True
-                answer = listWord[rndom.randrange(0, len(possibilities), 1)].text
+                answer = possibilities[rndom.randrange(0, len(possibilities), 1)]
                 answer = re.sub("@UT", word.text, answer)
             elif not alreadyCompleted:
                 alreadyCompleted = True
@@ -309,11 +306,18 @@ for x in dataTag:
 print("Hajime!")
 """
 print("Hello, I'm Glados")
-userIn = "Hello, I'm Glados"
-userIn = userIn.lower()
+userIn = "Hello"
 listWord = nlp(u"%s"%(userIn, ))
+userIn = userIn.lower()
+
 userIn = tokenise(userIn, "en")
 sentence = "Hello @PN, I'm worst-friend bot."
+
+for np in listWord.noun_chunks:
+    print(np.text, np.root.text, np.root.dep_, np.root.head.text)
+    
+for word in listWord:
+    print(word.text, word.lemma, word.lemma_, word.tag, word.tag_, word.pos, word.pos_)
 
 print(existTags(userIn, listWord))
 """
@@ -330,11 +334,12 @@ while True:
     sentenceType = "affirmation"
     
     
-    userInput = userInput.lower()
-    tokens = tokenise(userInput,"en")
-    
-    
+    userInLow = userInput.lower()
     userInput = nlp(u"%s"%(userInput, ))
+    tokens = tokenise(userInLow,"en")
+    
+    
+    
     subjects = []
     for np in userInput.noun_chunks:
         print(np.text, np.root.text, np.root.dep_, np.root.head.text)
@@ -356,12 +361,12 @@ while True:
         sentenceType = "question" 
         
     for w in userInput:
-        if w.lemma == 776980:
+        if w.lemma >= 776980:
             sentenceType = "nonsense"
     
     print(sentenceType)
     
     print("sentence : " + sentenceType)
-    #print("WFB << " + generateAnswer(userInput, sentenceType, listWord))
+    print("WFB << " + generateAnswer(tokens, sentenceType, userInput))
 
 print ("Hello World\n")
